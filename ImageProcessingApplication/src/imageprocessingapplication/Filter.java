@@ -12,6 +12,6 @@ import javax.imageio.ImageIO;
  */
 interface Filter<T>{
 
-    T convert(T entity);
+    T filter(T entity);
     
 }

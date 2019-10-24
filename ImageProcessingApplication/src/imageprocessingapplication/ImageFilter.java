@@ -13,6 +13,8 @@ import java.awt.image.BufferedImage;
 interface ImageFilter extends Filter<BufferedImage>{
     
     @Override
-    public BufferedImage convert(BufferedImage img);
+    public BufferedImage filter(BufferedImage img);
+    
+    public BufferedImage filter(BufferedImage img,int threadPosition);
     
 }
