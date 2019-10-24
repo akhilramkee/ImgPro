@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
  *
  * @author Akhilesh
  */
-public class SepiaConverter {
+public class SepiaConverter implements Converter<BufferedImage>{
     
     BufferedImage image;
     
@@ -24,7 +24,8 @@ public class SepiaConverter {
         this.image = image;
     }
     
-    public BufferedImage convertToSepia(BufferedImage img){
+    @Override
+    public BufferedImage convert(BufferedImage img){
         this.image = img;
         int height = image.getHeight();
         int width = image.getWidth();

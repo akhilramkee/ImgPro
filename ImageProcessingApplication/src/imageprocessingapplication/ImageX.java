@@ -100,7 +100,7 @@ public class ImageX {
     
     public boolean convertToSepia(){
         
-        this.image = new SepiaConverter().convertToSepia(image);
+        this.image = new SepiaConverter().convert(image);
         
         if(this.image != null)
             return true;
