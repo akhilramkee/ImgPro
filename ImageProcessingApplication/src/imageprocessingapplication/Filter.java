@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
  *
  * @author Akhilesh
  */
-interface Converter<T>{
+interface Filter<T>{
 
     T convert(T entity);
     

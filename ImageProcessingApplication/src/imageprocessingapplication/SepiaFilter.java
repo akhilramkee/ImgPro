@@ -12,15 +12,15 @@ import javax.imageio.ImageIO;
  *
  * @author Akhilesh
  */
-public class SepiaConverter implements Converter<BufferedImage>{
+public class SepiaFilter implements Filter<BufferedImage>{
     
     BufferedImage image;
     
-    public SepiaConverter(){
+    public SepiaFilter(){
         this.image = null;
     }
     
-    public SepiaConverter(BufferedImage image){
+    public SepiaFilter(BufferedImage image){
         this.image = image;
     }
     

@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
  *
  * @author Akhilesh
  */
-public class NegativeConverter implements Converter<BufferedImage>{
+public class NegativeFilter implements Filter<BufferedImage>{
     
     @Override
     public BufferedImage convert(BufferedImage image){
