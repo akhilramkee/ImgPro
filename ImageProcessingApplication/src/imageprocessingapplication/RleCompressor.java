@@ -6,6 +6,7 @@
 package imageprocessingapplication;
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 /**
  *
@@ -13,7 +14,8 @@ import java.awt.image.BufferedImage;
  */
 public class RleCompressor implements ImageCompressor{
 
-    class Triplet{
+    class Triplet implements Serializable{
+        
         public int count;
         public int element;
         
