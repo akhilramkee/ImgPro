@@ -60,9 +60,8 @@ public class MedianFilter implements ImageFilter{
     }
     
     @Override
-    public synchronized BufferedImage filter(BufferedImage bufferedImage,int threadAmount){
+    public synchronized BufferedImage filter(BufferedImage bufferedImage,int threadCounter,int threadAmount){
         
-        int threadCounter = this.getCount();
         this.setCount(this.count + 1);
         int imageHeight = bufferedImage.getHeight();
         int imageWidth = bufferedImage.getWidth();

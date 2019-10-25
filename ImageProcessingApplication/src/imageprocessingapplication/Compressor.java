@@ -10,8 +10,8 @@ package imageprocessingapplication;
  * @author sai
  */
 
-interface Compressor<T> {
+interface Compressor<G,T> {
     
-    T compressor(T entity);
+    G compressor(T entity);
     
 }

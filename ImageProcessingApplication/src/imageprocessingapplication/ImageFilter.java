@@ -15,6 +15,6 @@ interface ImageFilter extends Filter<BufferedImage>{
     @Override
     public BufferedImage filter(BufferedImage img);
     
-    public BufferedImage filter(BufferedImage img,int threadPosition);
+    public BufferedImage filter(BufferedImage img,int threadPosition,int totalThreads);
     
 }

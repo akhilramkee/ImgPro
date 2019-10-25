@@ -54,12 +54,10 @@ public class GrayscaleFilter implements ImageFilter{
     }
     
     @Override
-    public synchronized BufferedImage filter(BufferedImage image,int ThreadAmount){
+    public synchronized BufferedImage filter(BufferedImage image,int threadCounter, int ThreadAmount){
         
         int width = image.getWidth(); 
-        int height = image.getHeight(); 
-        int threadCounter = this.getCount();
-        this.setCount(threadCounter+1);
+        int height = image.getHeight();
   
         int heightPerThread = height/ThreadAmount;
         int modulo = height%ThreadAmount;

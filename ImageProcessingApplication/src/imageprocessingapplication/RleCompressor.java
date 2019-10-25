@@ -6,7 +6,15 @@
 package imageprocessingapplication;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Serializable;
+import java.util.Arrays;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -36,87 +44,69 @@ public class RleCompressor implements ImageCompressor{
     }
     
     @Override
-    public BufferedImage compressor(BufferedImage image){
+    public byte[] compressor(BufferedImage image){
         
-        int height = image.getHeight();
-        int width = image.getWidth();
-        
-        for(int y=0;y < height;y++){
-            for(int x=0; x<width;x++){
-                int pixel = image.getRGB(x,y);
-                
-                int a = (pixel>>24)&0xff;
-                int R = (pixel>>16)&0xff;
-                int G = (pixel>>8)&0xff;
-                int B = pixel&0xff;
-                
-
+       ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        byte[] imageInByte = null;
+        try{
+            ImageIO.write(image, "BMP", baos);
+            imageInByte = baos.toByteArray();
+            File file = new File("E:/before.txt");
+            try{
+                try (OutputStream os = new FileOutputStream(file)) {
+                    os.write(baos.toByteArray());
+                }
+            }catch(Exception e){
+                e.printStackTrace();
             }
+            
+            baos.close();
+        }catch(IOException e){
+            System.out.println(e);
         }
         
+        ByteArrayOutputStream dest = new ByteArrayOutputStream();  
+        byte lastByte = imageInByte[0];
+        int matchCount = 1;
+        for(int i=1; i < imageInByte.length; i++){
+             byte thisByte = imageInByte[i];
+                if (lastByte == thisByte) {
+                    matchCount++;
+                }
+                else {
+                    dest.write((byte)matchCount);  
+                    dest.write((byte)lastByte);
+                    matchCount=1;
+                    lastByte = thisByte;
+                }                
+        }
+        dest.write((byte)matchCount);  
+        dest.write((byte)lastByte);
+        byte[] runLengthEncode = dest.toByteArray(); 
+//        System.out.println(Arrays.toString(runLengthEncode));
+        
+        return runLengthEncode;
+    }
+    
+    public static BufferedImage decompress(byte[] bytes) {
+        BufferedImage image = null;
+        ByteArrayOutputStream dest = new ByteArrayOutputStream();
+        for (int i = 0; i < bytes.length; i += 2) {
+            byte tmp = bytes[i];
+            while (tmp > 0) {
+                dest.write(bytes[i + 1]);
+                tmp--;
+            }
+        }
+  
+        ByteArrayInputStream bais = new ByteArrayInputStream(dest.toByteArray());
+        try{
+            image = ImageIO.read(bais);
+        }catch(Exception e){
+            System.out.println(e);
+        }
         return image;
     }
     
-    @Override
-    public synchronized BufferedImage compressor(BufferedImage image,int ThreadAmount){
-        
-        int width = image.getWidth(); 
-        int height = image.getHeight(); 
-        int threadCounter = this.getCount();
-        this.setCount(threadCounter+1);
-  
-        int heightPerThread = height/ThreadAmount;
-        int modulo = height%ThreadAmount;
-        // convert to greyscale 
-        for (int y = (heightPerThread*threadCounter); y < (heightPerThread*(threadCounter+1)); y++) 
-        { 
-            for (int x = 0; x < width; x++) 
-            { 
-                int pixel = image.getRGB(x,y);
-                
-                int a = (pixel>>24)&0xff;
-                int R = (pixel>>16)&0xff;
-                int G = (pixel>>8)&0xff;
-                int B = pixel&0xff;
-                
-            } 
-        }
-        
-        if(modulo > 0 && ThreadAmount == (threadCounter+1)){
-            for (int y = (heightPerThread * ThreadAmount); y < (heightPerThread * ThreadAmount) + modulo - 2; y++) {
-                for (int x = 0; x < width; x++) {
-                    
-                int pixel = image.getRGB(x,y);
-                
-                int a = (pixel>>24)&0xff;
-                int R = (pixel>>16)&0xff;
-                int G = (pixel>>8)&0xff;
-                int B = pixel&0xff;
-                
-                int newRed = (int)(0.393*R+0.769*G+0.189*B);
-                int newGreen = (int)(0.349*R+0.686*G+0.168*B);
-                int newBlue = (int)(0.272*R+0.534*G+0.131*B);
-                
-                if(newRed>255)
-                    R=255;
-                else
-                    R=newRed;
-                if(newGreen>255)
-                    G = 255;
-                else
-                    G =newGreen;
-                if(newBlue>255)
-                    B=255;
-                else
-                    B=newBlue;
-                
-                pixel = (a<<24)|(R<<16)|(G<<8)|B;
-                
-                image.setRGB(x, y, pixel);
-                }
-            }
-        }
-        return image;
-    }
         
 }

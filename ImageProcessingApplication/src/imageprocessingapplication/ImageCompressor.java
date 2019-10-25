@@ -10,11 +10,10 @@ import java.awt.image.BufferedImage;
  *
  * @author Akhilesh
  */
-interface ImageCompressor extends Compressor<BufferedImage>{
-    
+interface ImageCompressor extends Compressor<byte[],BufferedImage>{
+  
     @Override
-    public BufferedImage compressor(BufferedImage img);
-    
-    public BufferedImage compressor(BufferedImage img,int threadPosition);
+    public byte[] compressor(BufferedImage img);
+
     
 }

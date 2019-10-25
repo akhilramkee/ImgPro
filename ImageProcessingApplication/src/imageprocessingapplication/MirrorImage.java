@@ -50,9 +50,8 @@ public class MirrorImage implements ImageFilter{
         return mimg;
     }
     
-    public BufferedImage filter(BufferedImage image,int ThreadAmount){
+    public BufferedImage filter(BufferedImage image,int threadCounter,int ThreadAmount){
         
-        int threadCounter = this.getCount();
         this.setCount(threadCounter+1);
         
         int width = image.getWidth();
