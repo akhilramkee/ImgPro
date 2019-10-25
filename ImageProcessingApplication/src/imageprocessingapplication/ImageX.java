@@ -31,7 +31,7 @@ public class ImageX {
     
     public ImageX(String inputFile){
         this.inputFileLocation = inputFile;
-        this.outputFileLocation = "E:\\untitled.jpg";
+        this.outputFileLocation = "untitled.jpg";
     }
     
     public ImageX(String inputFile,String outputFile){
@@ -45,6 +45,7 @@ public class ImageX {
         int height = 640;
         
         try{
+            System.out.println(inputFileLocation);
             File inputFile = new File(inputFileLocation);
             
             this.image = new BufferedImage(width,height,BufferedImage.TYPE_INT_ARGB);
@@ -102,12 +103,32 @@ public class ImageX {
         
         this.image = new SepiaFilter().filter(image);
         
-        if(this.image != null)
-            return true;
-        else
-            return false;
+        return this.image != null;
         
     }
     
+    public boolean convertToNegative(){
+        this.image = new NegativeFilter().filter(image);
+        
+        return this.image != null;
+    }
+    
+    public boolean convertToMirror(){
+        this.image = new MirrorImage().filter(image);
+        
+        return this.image!=null;
+    }
+    
+    public boolean medianFilter(){
+        this.image = new MedianFilter().filter(image);
+        
+        return this.image!=null;
+    }
+    
+    public boolean grayscaleFilter(){
+        this.image = new GrayscaleFilter().filter(image);
+        
+        return this.image!=null;
+    }
         
 }
