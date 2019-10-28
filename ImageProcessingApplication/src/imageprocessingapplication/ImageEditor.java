@@ -29,7 +29,7 @@ class ImageNotLoadedException extends Exception{
 
 
 
-public class ImageX {
+public class ImageEditor {
     
     String inputFileLocation,outputFileLocation;
     BufferedImage image = null;
@@ -48,20 +48,22 @@ public class ImageX {
         count = 0;
     }
     
-    public ImageX(String inputFile){
+    public ImageEditor(){}
+    
+    public ImageEditor(String inputFile){
         this.inputFileLocation = inputFile;
         this.outputFileLocation = "untitled.jpg";
     }
     
-    public ImageX(String inputFile,String outputFile){
+    public ImageEditor(String inputFile,String outputFile){
         this.inputFileLocation = inputFile;
         this.outputFileLocation = outputFile;
     }
     
     public boolean open() throws IOException{
         
-        int width = 963;
-        int height = 640;
+        int width = 1024;
+        int height = 1024;
         
         try{
             System.out.println(inputFileLocation);
@@ -308,7 +310,7 @@ public class ImageX {
      */
         
     public boolean compress(String Location){
-        byte[] compressedByte = new RleCompressor().compressor(image);
+        byte[] compressedByte = new RleCompressor().compress(image);
         File file = new File(Location);
         try{
             try (OutputStream os = new FileOutputStream(file)) {
@@ -350,7 +352,7 @@ public class ImageX {
             }
 
             imageData = bytestream.toByteArray();
-
+            
             this.image = RleCompressor.decompress(imageData);
             
             this.write(decompressedLocation);

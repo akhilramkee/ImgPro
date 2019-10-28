@@ -8,21 +8,15 @@ import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.Arrays;
+
 /**
- *
+ * 
+ * Median Filter algorithm
+ * 
+ * @author Sai
  * @author Akhilesh
  */
 public class MedianFilter implements ImageFilter{
-    
-    private int count = 0;
-    
-    public int getCount(){
-        return count;
-    }
-    
-    public void setCount(int newCount){
-        count = newCount;
-    }
     
     @Override
     public BufferedImage filter(BufferedImage image){
@@ -62,7 +56,6 @@ public class MedianFilter implements ImageFilter{
     @Override
     public synchronized BufferedImage filter(BufferedImage bufferedImage,int threadCounter,int threadAmount){
         
-        this.setCount(this.count + 1);
         int imageHeight = bufferedImage.getHeight();
         int imageWidth = bufferedImage.getWidth();
 

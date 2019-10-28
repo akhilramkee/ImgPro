@@ -9,20 +9,13 @@ import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 /**
- *
+ * 
+ * Converts any given image to its equivalent 32-bit negative
+ * 
+ * @author Sai
  * @author Akhilesh
  */
 public class NegativeFilter implements ImageFilter{
-    
-    private int count = 0;
-    
-    public int getCount(){
-        return count;
-    }
-    
-    public void setCount(int newCount){
-        count = newCount;
-    }
     
     @Override
     public BufferedImage filter(BufferedImage image){

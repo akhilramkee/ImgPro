@@ -6,12 +6,12 @@
 package imageprocessingapplication;
 
 /**
- *
+ * A template for defining a  compression algorithm
  * @author sai
  */
 
 interface Compressor<G,T> {
     
-    G compressor(T entity);
+    G compress(T entity);
     
 }

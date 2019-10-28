@@ -7,13 +7,17 @@ package imageprocessingapplication;
 import java.awt.image.BufferedImage;
 
 /**
- *
+ * 
+ * Interface extending from compressor. Contains declaration to image based compression techniques.
+ * 
+ * 
+ * @author Sai
  * @author Akhilesh
  */
 interface ImageCompressor extends Compressor<byte[],BufferedImage>{
   
     @Override
-    public byte[] compressor(BufferedImage img);
+    public byte[] compress(BufferedImage img);
 
     
 }

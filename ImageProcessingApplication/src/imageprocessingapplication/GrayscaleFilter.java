@@ -11,16 +11,6 @@ import java.awt.image.BufferedImage;
  */
 public class GrayscaleFilter implements ImageFilter{
     
-    private int count = 0;
-    
-    public int getCount(){
-        return count;
-    }
-    
-    public void setCount(int newCount){
-        count = newCount;
-    }
-    
     @Override
     public BufferedImage filter(BufferedImage image){
         
@@ -32,8 +22,7 @@ public class GrayscaleFilter implements ImageFilter{
         { 
             for (int x = 0; x < width; x++) 
             { 
-                // Here (x,y)denotes the coordinate of image  
-                // for modifying the pixel value. 
+                
                 int p = image.getRGB(x,y); 
   
                 int a = (p>>24)&0xff; 

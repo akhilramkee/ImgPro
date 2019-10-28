@@ -14,16 +14,6 @@ import javax.imageio.ImageIO;
  */
 public class SepiaFilter implements ImageFilter{
     
-    private int count = 0;
-    
-    public int getCount(){
-        return count;
-    }
-    
-    public void setCount(int newCount){
-        count = newCount;
-    }
-    
     @Override
     public BufferedImage filter(BufferedImage image){
         

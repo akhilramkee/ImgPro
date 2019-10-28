@@ -6,8 +6,13 @@
 package imageprocessingapplication;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+
 /**
- *
+ * 
+ * Interface class which the key structure for extending any kind of filters such as Image, Audio and Video.
+ * This package just grazes the implementation of a image based filter library
+ * 
+ * @author Sai
  * @author Akhilesh
  */
 interface Filter<T>{

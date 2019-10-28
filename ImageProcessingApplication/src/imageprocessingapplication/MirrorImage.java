@@ -8,21 +8,12 @@ import java.awt.image.BufferedImage;
 /**
  *
  * @author Akhilesh
+ * @author Sai
  */
 public class MirrorImage implements ImageFilter{
     
-    
-    private int count = 0;
-    
-    public int getCount(){
-        return count;
-    }
-    
-    public void setCount(int newCount){
-        count = newCount;
-    }
-    
-    
+        
+    @Override
     public BufferedImage filter(BufferedImage image){
         int width = image.getWidth(); 
         int height = image.getHeight(); 
@@ -51,8 +42,6 @@ public class MirrorImage implements ImageFilter{
     }
     
     public BufferedImage filter(BufferedImage image,int threadCounter,int ThreadAmount){
-        
-        this.setCount(threadCounter+1);
         
         int width = image.getWidth();
         int height = image.getHeight();

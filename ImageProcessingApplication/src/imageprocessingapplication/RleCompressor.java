@@ -44,14 +44,14 @@ public class RleCompressor implements ImageCompressor{
     }
     
     @Override
-    public byte[] compressor(BufferedImage image){
+    public byte[] compress(BufferedImage image){
         
        ByteArrayOutputStream baos = new ByteArrayOutputStream();
         byte[] imageInByte = null;
         try{
             ImageIO.write(image, "BMP", baos);
             imageInByte = baos.toByteArray();
-            File file = new File("E:/before.txt");
+            File file = new File("E:/java/before.txt");
             try{
                 try (OutputStream os = new FileOutputStream(file)) {
                     os.write(baos.toByteArray());
@@ -94,16 +94,15 @@ public class RleCompressor implements ImageCompressor{
         for (int i = 0; i < bytes.length; i += 2) {
             byte tmp = bytes[i];
             while (tmp > 0) {
-                dest.write(bytes[i + 1]);
+                dest.write((byte)bytes[i + 1]);
                 tmp--;
             }
         }
-  
         ByteArrayInputStream bais = new ByteArrayInputStream(dest.toByteArray());
         try{
             image = ImageIO.read(bais);
         }catch(Exception e){
-            System.out.println(e);
+            System.out.println("Here is while reading");
         }
         return image;
     }
