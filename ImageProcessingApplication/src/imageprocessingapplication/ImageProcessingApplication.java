@@ -86,7 +86,6 @@ public class ImageProcessingApplication {
     
     public void OverlayStream(Integer FilterOption){
         
-        Integer ThreadCount;
         System.out.println("Enter the Source File:");
         String inputFile = getFileName();
         ImageEditor imageFile = new ImageEditor(inputFile);
